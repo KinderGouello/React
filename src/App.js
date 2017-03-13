@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 // class App extends React.Component {
 //   render() {
@@ -10,12 +11,24 @@ import React from 'react';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {currentEvent: '---'}
+    this.state = {
+      currentEvent: '---',
+      a: ''
+    }
     this.update = this.update.bind(this)
   }
 
   update(event) {
     this.setState({currentEvent: event.type})
+  }
+
+  updateInput() {
+    this.setState({
+      a: this.a.value,
+      b: this.refs.b.value,
+      c: ReactDOM.findDOMNode(this.c).value,
+      d: this.d.refs.inputd.value
+    })
   }
 
   render() {
@@ -36,9 +49,47 @@ class App extends React.Component {
           cols="30"
           rows="10">
         </textarea>
+        <hr/>
+        <input
+          ref={ node => this.a = node }
+          type="text"
+          onChange={this.updateInput.bind(this)}
+        />
+        {this.state.a}
+        <hr/>
+        <input
+          ref="b"
+          type="text"
+          onChange={this.updateInput.bind(this)}
+        />
+        {this.state.b}
+        <hr/>
+        <Input
+          ref={ component => this.c = component }
+          update={this.updateInput.bind(this)}
+        />
+        {this.state.c}
+        <hr/>
+        <InputD
+          ref={ component => this.d = component }
+          update={this.updateInput.bind(this)}
+        />
+        {this.state.d}
         <h1>{this.state.currentEvent}</h1>
       </div>
     )
+  }
+}
+
+class Input extends React.Component {
+  render() {
+    return <input type="text" onChange={this.props.update} />
+  }
+}
+
+class InputD extends React.Component {
+  render() {
+    return <div><input ref="inputd" type="text" onChange={this.props.update} /></div>
   }
 }
 
