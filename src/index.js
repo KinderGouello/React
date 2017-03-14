@@ -2,13 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Lifecycle from './Lifecycle';
-
-// ReactDOM.render(
-//   <App testprop="prop text" />,
-//   document.getElementById('root')
-// );
+import Lesson13 from './Lesson13';
 
 ReactDOM.render(
-  <Lifecycle />,
+  //   <App testprop="prop text" />,
+  //   <Lifecycle />,
+  <Lesson13 />,
   document.getElementById('root')
 );
